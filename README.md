@@ -42,13 +42,29 @@ Para esto, realice lo siguiente:
 	stompClient.send("/topic/newpoint", {}, JSON.stringify(pt)); 
 	```
 
+    ![Image](https://github.com/user-attachments/assets/ec81ccc9-32e1-4165-9f4d-38391a7b58b8)
+
+	![Image](https://github.com/user-attachments/assets/a05eba8a-3cc5-43f7-8ee5-dec1e159c462)
+
 2. Dentro del módulo JavaScript modifique la función de conexión/suscripción al WebSocket, para que la aplicación se suscriba al tópico "/topic/newpoint" (en lugar del tópico /TOPICOXX). Asocie como 'callback' de este suscriptor una función que muestre en un mensaje de alerta (alert()) el evento recibido. Como se sabe que en el tópico indicado se publicarán sólo puntos, extraiga el contenido enviado con el evento (objeto JavaScript en versión de texto), conviértalo en objeto JSON, y extraiga de éste sus propiedades (coordenadas X y Y). Para extraer el contenido del evento use la propiedad 'body' del mismo, y para convertirlo en objeto, use JSON.parse. Por ejemplo:
 
 	```javascript
 	var theObject=JSON.parse(message.body);
 	```
+
+    ![Image](https://github.com/user-attachments/assets/3807cd99-1152-4199-a0a4-c7ec23707512)
+
 3. Compile y ejecute su aplicación. Abra la aplicación en varias pestañas diferentes (para evitar problemas con el caché del navegador, use el modo 'incógnito' en cada prueba).
-4. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
+
+    ![Image](https://github.com/user-attachments/assets/f584d06c-dea7-4ead-b5b6-5a3d8173ca36)
+
+6. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
+
+    ![Image](https://github.com/user-attachments/assets/71c66f37-769b-4cb3-9d6a-461fbb2c1f2d)
+
+    ![Image](https://github.com/user-attachments/assets/9e394ab8-753e-45c4-b263-675ead754f34)
+
+	![Image](https://github.com/user-attachments/assets/8d5cf1fa-7aca-43c9-8553-3abdf9f9e8ed)
 
 5. Haga commit de lo realizado, para demarcar el avance de la parte 2.
 
