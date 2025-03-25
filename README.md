@@ -109,6 +109,8 @@ Ajuste la aplicación anterior para que pueda manejar más de un dibujo a la vez
 
 2. Modifique la aplicación para que, en lugar de conectarse y suscribirse automáticamente (en la función init()), lo haga a través de botón 'conectarse'. Éste, al oprimirse debe realizar la conexión y suscribir al cliente a un tópico que tenga un nombre dinámico, asociado el identificador ingresado, por ejemplo: /topic/newpoint.25, topic/newpoint.80, para los dibujos 25 y 80 respectivamente.
 
+    ![Image](https://github.com/user-attachments/assets/4c430a96-c634-457b-898f-bf035b5318ec)
+
     ![Image](https://github.com/user-attachments/assets/d056b85e-976a-48c7-9524-f7158cbd9503)
 
 	![Image](https://github.com/user-attachments/assets/abc4b978-214b-4781-af34-ca3d1af499f6)
@@ -122,6 +124,12 @@ Ajuste la aplicación anterior para que pueda manejar más de un dibujo a la vez
 	```bash
 	git commit -m "PARTE 3".
 	```
+
+	![Image](https://github.com/user-attachments/assets/47b6da35-2cd9-46ed-88e5-dc9819f3d951)
+	
+	![Image](https://github.com/user-attachments/assets/6784ccde-e1e4-4e2b-a677-6394ec6b20f6)
+	
+	![Image](https://github.com/user-attachments/assets/ceb6e1d4-5fcd-49ac-9eab-adb5fae83699)
 
 
 ## Parte IV.
