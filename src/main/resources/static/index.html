@@ -24,13 +24,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="/app.js"></script>
-
     </head>
 
+    <body>
+    <h2>Seleccione un ID de dibujo y conéctese</h2>
+    <input type="number" id="drawingId" placeholder="Ingrese ID del dibujo">
+    <button onclick="app.connect()">Conectarse</button>
 
-
-    <body onload="app.init()">
-        <h2>Haz clic en el canvas para dibujar puntos</h2>
-        <canvas id="canvas" width="800" height="600" style="border:1px solid black;"></canvas>
+    <h2>Haz clic en el canvas para dibujar puntos</h2>
+    <canvas id="canvas" width="800" height="600" style="border:1px solid black;"></canvas>
     </body>
 </html>

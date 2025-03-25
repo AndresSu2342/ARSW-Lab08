@@ -8,6 +8,7 @@ var app = (function () {
     }
 
     var stompClient = null;
+    var drawingId = null;  // ID del dibujo actual
 
     var addPointToCanvas = function (point) {
         var canvas = document.getElementById("canvas");
@@ -36,11 +37,15 @@ var app = (function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            // Suscribirse al tópico /topic/newpoint
-            stompClient.subscribe('/topic/newpoint', function (message) {
+
+            // Suscribirse al tópico dinámico con el ID del dibujo
+            var topic = `/topic/newpoint.${drawingId}`;
+            stompClient.subscribe(topic, function (message) {
                 var receivedPoint = JSON.parse(message.body);
                 addPointToCanvas(receivedPoint);
             });
+
+            console.log(`Suscrito a ${topic}`);
         });
 
     };
@@ -48,23 +53,29 @@ var app = (function () {
 
 
     return {
+        connect: function () {
+            // Obtener el ID del dibujo ingresado por el usuario
+            drawingId = document.getElementById("drawingId").value;
+            if (!drawingId) {
+                alert("Por favor, ingrese un ID de dibujo.");
+                return;
+            }
 
-        init: function () {
-            var can = document.getElementById("canvas");
-
+            console.info(`Conectando al dibujo ${drawingId}...`);
             //websocket connection
             connectAndSubscribe();
 
             canvas.addEventListener("click", function (evt) {
                 var pos = getMousePosition(evt);
                 var pt = new Point(pos.x, pos.y);
-                console.info("Enviando punto: " + JSON.stringify(pt));
+                console.info("Enviando punto a ${drawingId}: " + JSON.stringify(pt));
 
                 // Dibujar el punto localmente
                 addPointToCanvas(pt);
 
                 // Enviar el punto al servidor
-                stompClient.send("/topic/newpoint", {}, JSON.stringify(pt));
+                var topic = `/topic/newpoint.${drawingId}`;
+                stompClient.send(topic, {}, JSON.stringify(pt));
             });
         },
 
