@@ -162,7 +162,21 @@ Para ver cómo manejar esto desde el manejador de eventos STOMP del servidor, re
 
 	```
 
+    ![Image](https://github.com/user-attachments/assets/70b92d9e-6d0a-47a7-940f-9f5ccb1e5819)
+
 2. Ajuste su cliente para que, en lugar de publicar los puntos en el tópico /topic/newpoint.{numdibujo}, lo haga en /app/newpoint.{numdibujo}. Ejecute de nuevo la aplicación y rectifique que funcione igual, pero ahora mostrando en el servidor los detalles de los puntos recibidos.
+
+    ![Image](https://github.com/user-attachments/assets/0248115d-0b44-49a0-8e63-c8f180874e9f)
+
+    ![Image](https://github.com/user-attachments/assets/b3441b52-6406-432a-be89-7610781de506)
+
+	![Image](https://github.com/user-attachments/assets/76d2693b-8c06-40d0-9ae6-426854f0f151)
+	
+	![Image](https://github.com/user-attachments/assets/1e11d799-2b90-4914-835c-b647316cde87)
+	
+	![Image](https://github.com/user-attachments/assets/2f1520f0-946c-4e93-855e-2c1c30c69ed9)
+	
+	![Image](https://github.com/user-attachments/assets/e4bca9f3-c3e0-4a59-8be3-b9f99601b5e2)
 
 3. Una vez rectificado el funcionamiento, se quiere aprovechar este 'interceptor' de eventos para cambiar ligeramente la funcionalidad:
 
@@ -171,16 +185,16 @@ Para ver cómo manejar esto desde el manejador de eventos STOMP del servidor, re
 
 	3. El cliente, ahora también se suscribirá al tópico '/topic/newpolygon'. El 'callback' asociado a la recepción de eventos en el mismo debe, con los datos recibidos, dibujar un polígono, [tal como se muestran en ese ejemplo](http://www.arungudelli.com/html5/html5-canvas-polygon/).
 	4. Verifique la funcionalidad: igual a la anterior, pero ahora dibujando polígonos cada vez que se agreguen cuatro puntos.
-	
-	
-5. A partir de los diagramas dados en el archivo ASTAH incluido, haga un nuevo diagrama de actividades correspondiente a lo realizado hasta este punto, teniendo en cuenta el detalle de que ahora se tendrán tópicos dinámicos para manejar diferentes dibujos simultáneamente.
+
+4. A partir de los diagramas dados en el archivo ASTAH incluido, haga un nuevo diagrama de actividades correspondiente a lo realizado hasta este punto, teniendo en cuenta el detalle de que ahora se tendrán tópicos dinámicos para manejar diferentes dibujos simultáneamente.
+
+    ![Image](https://github.com/user-attachments/assets/4ca0c219-eae3-4c7f-9e31-2546de066255)
 
 5. Haga commit de lo realizado.
 
 	```bash
 	git commit -m "PARTE FINAL".
 	```	
-
 
 
 ### Criterios de evaluación

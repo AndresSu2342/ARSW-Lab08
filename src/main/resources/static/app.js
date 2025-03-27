@@ -18,6 +18,26 @@ var app = (function () {
         ctx.stroke();
     };
 
+    var drawPolygon = function (polygon) {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        if (polygon.length < 3) return; // Un polígono necesita al menos 3 puntos
+
+        ctx.beginPath();
+        ctx.moveTo(polygon[0].x, polygon[0].y);
+
+        for (var i = 1; i < polygon.length; i++) {
+            ctx.lineTo(polygon[i].x, polygon[i].y);
+        }
+        ctx.closePath();
+
+        ctx.fillStyle = "rgba(0, 255, 0, 0.3)"; // Color verde semi-transparente
+        ctx.fill();
+        ctx.strokeStyle = "green";
+        ctx.stroke();
+    };
+
 
     var getMousePosition = function (evt) {
         canvas = document.getElementById("canvas");
@@ -38,14 +58,19 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
 
-            // Suscribirse al tópico dinámico con el ID del dibujo
-            var topic = `/topic/newpoint.${drawingId}`;
-            stompClient.subscribe(topic, function (message) {
+            // Suscribirse a los puntos individuales
+            stompClient.subscribe(`/topic/newpoint.${drawingId}`, function (message) {
                 var receivedPoint = JSON.parse(message.body);
                 addPointToCanvas(receivedPoint);
             });
 
-            console.log(`Suscrito a ${topic}`);
+            // Suscribirse a los polígonos
+            stompClient.subscribe(`/topic/newpolygon.${drawingId}`, function (message) {
+                var receivedPolygon = JSON.parse(message.body).points;
+                drawPolygon(receivedPolygon);
+            });
+
+            console.log(`Suscrito a /topic/newpoint.${drawingId} y /topic/newpolygon.${drawingId}`);
         });
 
     };
@@ -70,12 +95,12 @@ var app = (function () {
                 var pt = new Point(pos.x, pos.y);
                 console.info("Enviando punto a ${drawingId}: " + JSON.stringify(pt));
 
+                // Enviar el punto al servidor /app/newpoint.{numdibujo}
+                var topic = `/app/newpoint.${drawingId}`;
+                stompClient.send(topic, {}, JSON.stringify(pt));
+
                 // Dibujar el punto localmente
                 addPointToCanvas(pt);
-
-                // Enviar el punto al servidor
-                var topic = `/topic/newpoint.${drawingId}`;
-                stompClient.send(topic, {}, JSON.stringify(pt));
             });
         },
 
